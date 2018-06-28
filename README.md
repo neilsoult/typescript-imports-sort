@@ -23,6 +23,7 @@ This configurable extension allows you to sort all the imports in a *.ts or *.ts
   * `package` - Any import path that does not begin with `.`
   * `relativeUpLevel` - Any import path that begins with `../`
   * `relativeDownLevel` - Any import path that begins with `./`
+* `typescript.extension.sortImports.bracketWhitespace`: If set to false whitespace will not be included in single line imports. Default: `true`
 * `typescript.extension.sortImports.maxNamedImportsInSingleLine`: The number of named imports to allow on a single line. If a single import has more than this number, they will be broken up onto separate lines.
 * `typescript.extension.sortImports.quoteStyle`: The type of quotation mark to use. `single`(default) or `double`.
 * `typescript.extension.sortImports.sortOnSave`: If set to `true`, imports will be sorted whenever you save a file. Default: `false`

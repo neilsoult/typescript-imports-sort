@@ -76,7 +76,12 @@
             "relativeUpLevel",
             "package"
           ]
-        },
+				},
+				"typescript.extension.sortImports.bracketWhitespace": {
+          "type": "boolean",
+          "description": "Whether or not to include whitespace between brackets of single line imports.",
+          "default": true
+					},
         "typescript.extension.sortImports.maxNamedImportsInSingleLine": {
           "type": "number",
           "description": "The maximum number of named imports to include in a single line",
