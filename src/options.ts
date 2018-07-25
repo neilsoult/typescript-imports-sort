@@ -42,6 +42,10 @@ export function getOmitSemicolon(): boolean {
     return getExtensionConfig().get('omitSemicolon') as boolean;
 }
 
+export function getBracketWhitespace(): boolean {
+	return getExtensionConfig().get('bracketWhitespace') as boolean;
+}
+
 function getExtensionConfig() {
     return vscode.workspace.getConfiguration('typescript.extension.sortImports');
 }

@@ -1,6 +1,6 @@
-import * as vscode from 'vscode';
 import * as options from './options';
 import { NamedImport, TypescriptImport } from './TypescriptImport';
+import * as vscode from 'vscode';
 
 export default function getSortedImportStatements(importClauses: TypescriptImport[]): string {
     if (importClauses && importClauses.length) {
@@ -42,9 +42,11 @@ function generatedNamedImportGroup(namedImports: NamedImport[]): string {
     if (generatedNamedImports.length > maxImportsPerSingleLine) {
         let newline = `\n${options.getTabString()}`;
         return `{${newline}${generatedNamedImports.join(`,${newline}`)}${newline}}`;
-    } else {
+    } else if (options.getBracketWhitespace()) {
         return `{ ${generatedNamedImports.join(', ')} }`;
-    }
+    } else {
+		return `{${generatedNamedImports.join(', ')}}`;
+	}
 }
 
 function generateNamedImport(namedImport: NamedImport): string {
