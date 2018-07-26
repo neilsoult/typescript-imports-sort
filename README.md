@@ -41,6 +41,9 @@ This configurable extension allows you to sort all the imports in a *.ts or *.ts
 
 ## Release Notes
 
+## 1.5.0
+- Added configuration option to remove whitespace for single line imports. Thank you Matthew Gerstman.
+
 ## 1.3.0
 - Added configuration option to omit the semicolon at the end of the import clause.
 
