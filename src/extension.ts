@@ -1,73 +1,88 @@
-'use strict';
+import * as vscode from 'vscode';
+import { isSupportedLanguage } from './is-supported-language';
+import { shouldEnableJavascript, shouldSortOnSave } from './options';
+import { sortInsideEditor } from './sort-inside-editor';
+import { sortOnSave } from './sort-on-save';
 // The module 'vscode' contains the VS Code extensibility API
 // Import the module and reference it with the alias vscode in your code below
-import * as vscode from 'vscode';
-import sortInsideEditor from './sortInsideEditor';
-import sortOnSave from './sortOnSave';
-import { shouldSortOnSave, shouldEnableJavascript } from './options';
 
 let sortOnSaveDisposer: vscode.Disposable;
 
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
-export function activate(context: vscode.ExtensionContext) {
+export const activate = (context: vscode.ExtensionContext) => {
 
     // The command has been defined in the package.json file
     // Now provide the implementation of the command with  registerCommand
     // The commandId parameter must match the command field in package.json
-    let sortOnCommandDisposer = vscode.commands.registerCommand('extension.sortTypescriptImports', () => {
+    const sortOnCommandDisposer = vscode.commands.registerCommand('extension.typescriptImportsSort', () => {
         // The code you place here will be executed every time your command is executed
 
-        if (shouldEnableJavascript() && isFileJavascript() ||
-            isFileTypescript()) {
+        if (shouldEnableJavascript() && isFileJavascript() || isFileTypescript()) {
+
             sortInsideEditor();
+
         }
+
     });
 
-    let configurationWatcher = vscode.workspace.onDidChangeConfiguration(configure);
+    const configurationWatcher = vscode.workspace.onDidChangeConfiguration(configure);
     configure();
 
-    context.subscriptions.push(
-        sortOnCommandDisposer,
-        configurationWatcher);
-}
+    context.subscriptions.push(sortOnCommandDisposer, configurationWatcher);
 
-function isFileJavascript() {
-    return (
-        vscode.window.activeTextEditor.document.languageId === 'javascript' ||
-        vscode.window.activeTextEditor.document.languageId === 'javascriptreact'
-    );
-}
+};
 
-function isFileTypescript() {
-    return (
-        vscode.window.activeTextEditor.document.languageId === 'typescript' ||
-        vscode.window.activeTextEditor.document.languageId === 'typescriptreact'
-    );
-}
+const isFileJavascript = () => {
 
-function configure() {
+    return ['javascript', 'javascriptreact'].includes(vscode.window.activeTextEditor.document.languageId);
+
+};
+
+const isFileTypescript = () => {
+
+    return isSupportedLanguage(vscode.window.activeTextEditor.document.languageId);
+
+};
+
+const configure = () => {
+
     if (shouldSortOnSave()) {
+
         enableFileWatcher();
+
     } else if (!shouldSortOnSave()) {
+
         disableFileWatcher();
-    }
-}
 
-function enableFileWatcher() {
+    }
+
+};
+
+const enableFileWatcher = () => {
+
     if (!sortOnSaveDisposer) {
-        sortOnSaveDisposer = vscode.workspace.onWillSaveTextDocument(sortOnSave);
-    }
-}
 
-function disableFileWatcher() {
+        sortOnSaveDisposer = vscode.workspace.onWillSaveTextDocument(sortOnSave);
+
+    }
+
+};
+
+const disableFileWatcher = () => {
+
     if (sortOnSaveDisposer) {
+
         sortOnSaveDisposer.dispose();
         sortOnSaveDisposer = undefined;
+
     }
-}
+
+};
 
 // this method is called when your extension is deactivated
-export function deactivate() {
+export const deactivate =  () => {
+
     disableFileWatcher();
-}
+
+};

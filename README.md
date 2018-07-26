@@ -15,20 +15,25 @@ This configurable extension allows you to sort all the imports in a *.ts or *.ts
 
 ## Extension Settings
 
-* `typescript.extension.sortImports.sortMethod`: The method to use for sorting the imports.
-  * `'importName'`(default) sorts by the type and name of the import. Namespace imports are first, followed by default imports, named imports, and unnamed imports.
-  * `'path'` sorts by the import path, sorting relative-path imports above package imports
+* `typescript.extension.sortImports.bracketWhitespace`: If set to false whitespace will not be included in single line imports. Default: `true`
+* `typescript.extension.sortImports.enableJavascript`: If set to `true`, the extension will attempt to sort ES6-style imports in Javascript files. Default: `false`
+* `typescript.extension.sortImports.maxNamedImportsInSingleLine`: The number of named imports to allow on a single line. If a single import has more than this number, they will be broken up onto separate lines.
+* `typescript.extension.sortImports.multilineIndention`: Control when to add indentation to multi-line imports.
+  * Default: `namesOnly`
+  * `none` - do not add indentation to multi-line imports.
+  * `namesOnly` - only add indentation to the lines with named imports.
+  * `namesAndPath` - add indentation to both the lines with named imports and the final line with the closing bracket and path.
+* `typescript.extension.sortImports.omitSemicolon`: If set to `true`, the trailing semicolon will be omitted. Default: `false`
 * `typescript.extension.sortImports.pathSortOrder`: An array describing the order in which imports should be sorted by paths. Only applicable if `sortMethod` is set to `path`.
   * Default: `["relativeDownLevel", "relativeUpLevel", "package"]`
   * `package` - Any import path that does not begin with `.`
   * `relativeUpLevel` - Any import path that begins with `../`
   * `relativeDownLevel` - Any import path that begins with `./`
-* `typescript.extension.sortImports.bracketWhitespace`: If set to false whitespace will not be included in single line imports. Default: `true`
-* `typescript.extension.sortImports.maxNamedImportsInSingleLine`: The number of named imports to allow on a single line. If a single import has more than this number, they will be broken up onto separate lines.
 * `typescript.extension.sortImports.quoteStyle`: The type of quotation mark to use. `single`(default) or `double`.
+* `typescript.extension.sortImports.sortMethod`: The method to use for sorting the imports.
+  * `'importName'`(default) sorts by the type and name of the import. Namespace imports are first, followed by default imports, named imports, and unnamed imports.
+  * `'path'` sorts by the import path, sorting relative-path imports above package imports
 * `typescript.extension.sortImports.sortOnSave`: If set to `true`, imports will be sorted whenever you save a file. Default: `false`
-* `typescript.extension.sortImports.omitSemicolon`: If set to `true`, the trailing semicolon will be omitted. Default: `false`
-* `typescript.extension.sortImports.enableJavascript`: If set to `true`, the extension will attempt to sort ES6-style imports in Javascript files. Default: `false`
 
 ## Known Issues
 
@@ -38,8 +43,13 @@ This configurable extension allows you to sort all the imports in a *.ts or *.ts
 - Handle distinct blocks of imports separated by a blank line.
 - Handle comments within import blocks
 - Read settings from existing tslint configuration.
+- Maybe none of these. ¯\_(ツ)_/¯
 
 ## Release Notes
+
+## 1.7.0
+- Added configuration option to control indention on multi-line imports.
+- General code style change to conform to my preferences.
 
 ## 1.5.0
 - Added configuration option to remove whitespace for single line imports. Thank you Matthew Gerstman.

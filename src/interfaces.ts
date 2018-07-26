@@ -1,11 +1,11 @@
 import * as vscode from 'vscode';
 
+export type DestructedImport = NamedImport;
+
 export interface NamedImport {
     importName: string;
     alias?: string;
 }
-
-export type DestructedImport = NamedImport;
 
 export interface TypescriptImport {
     path: string;
