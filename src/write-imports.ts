@@ -1,6 +1,39 @@
 import { NamedImport, TypescriptImport } from './interfaces';
 import * as options from './options';
 
+const generateNamedImport = (namedImport: NamedImport): string => {
+
+    if (namedImport.alias) {
+
+        return `${namedImport.importName} as ${namedImport.alias}`;
+
+    }
+
+    return namedImport.importName;
+
+};
+
+const generatedNamedImportGroup = (namedImports: NamedImport[]): string => {
+
+    const trailingComma = options.getTrailingCommaOption();
+    const trailingCommaOnMultiLine = ['always', 'multiLineOnly'].includes(trailingComma);
+    const trailingCommaOnSingleLine = ['always', 'singleLineOnly'].includes(trailingComma);
+    if (namedImports.length > options.getMaxNamedImportsPerSingleLine()) {
+
+        return `{${options.getNewLine()}`
+            + getJoinedNamedImportList(namedImports, true, trailingCommaOnMultiLine)
+            + `${options.getNewLine(true)}}`;
+
+    } else if (options.getBracketWhitespace()) {
+
+        return `{ ${getJoinedNamedImportList(namedImports, false, trailingCommaOnSingleLine)} }`;
+
+    }
+
+    return `{${getJoinedNamedImportList(namedImports, false, trailingCommaOnSingleLine)}}`;
+
+};
+
 const getImportClauseString = (importClause: TypescriptImport): string => {
 
     const path = getPath(importClause);
@@ -35,41 +68,18 @@ const getImportClauseString = (importClause: TypescriptImport): string => {
 
 };
 
+const getJoinedNamedImportList = (namedImports: NamedImport[], isMultline: boolean, addTrailingComma: boolean) => {
+
+    const generatedNamedImports = namedImports.map(generateNamedImport);
+    const joiner = isMultline ? `,${options.getNewLine()}` : ', ';
+    return generatedNamedImports.join(joiner) + (addTrailingComma ? ',' : '');
+
+};
+
 const getPath = (importClause: TypescriptImport): string => {
 
     const quote = options.getQuoteToken();
     return `${quote}${importClause.path}${quote}`;
-
-};
-
-const generatedNamedImportGroup = (namedImports: NamedImport[]): string => {
-
-    const generatedNamedImports = namedImports.map(generateNamedImport);
-    const maxImportsPerSingleLine = options.getMaxNamedImportsPerSingleLine();
-    if (generatedNamedImports.length > maxImportsPerSingleLine) {
-
-        return `{${options.getNewLine()}${generatedNamedImports.join(`,${options.getNewLine()}`)}`
-            + `${options.getNewLine(true)}}`;
-
-    } else if (options.getBracketWhitespace()) {
-
-        return `{ ${generatedNamedImports.join(', ')} }`;
-
-    }
-
-    return `{${generatedNamedImports.join(', ')}}`;
-
-};
-
-const generateNamedImport = (namedImport: NamedImport): string => {
-
-    if (namedImport.alias) {
-
-        return `${namedImport.importName} as ${namedImport.alias}`;
-
-    }
-
-    return namedImport.importName;
 
 };
 

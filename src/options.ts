@@ -78,6 +78,12 @@ export const getSortOption = (): string => {
 
 };
 
+export const getTrailingCommaOption = (): string => {
+
+    return getExtensionConfig().get('forceTrailingCommas');
+
+};
+
 export const shouldEnableJavascript = (): boolean => {
 
     return getExtensionConfig().get('enableJavascript') as boolean;

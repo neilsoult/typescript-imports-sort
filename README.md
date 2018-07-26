@@ -17,6 +17,12 @@ This configurable extension allows you to sort all the imports in a *.ts or *.ts
 
 * `typescript.extension.sortImports.bracketWhitespace`: If set to false whitespace will not be included in single line imports. Default: `true`
 * `typescript.extension.sortImports.enableJavascript`: If set to `true`, the extension will attempt to sort ES6-style imports in Javascript files. Default: `false`
+* `typescript.extension.sortImports.forceTrailingCommas`: Add the ability to use trailing commas in named import lists.
+  * Default: `never`
+  * `never` - never add any trailing commas.
+  * `always` - always add trailing commas.
+  * `singleLineOnly` - only add trailing commas to single line lists.
+  * `multiLineOnly` - only add trailing commas to muti-line lists.
 * `typescript.extension.sortImports.maxNamedImportsInSingleLine`: The number of named imports to allow on a single line. If a single import has more than this number, they will be broken up onto separate lines.
 * `typescript.extension.sortImports.multilineIndention`: Control when to add indentation to multi-line imports.
   * Default: `namesOnly`
@@ -46,6 +52,9 @@ This configurable extension allows you to sort all the imports in a *.ts or *.ts
 - Maybe none of these. ¯\_(ツ)_/¯
 
 ## Release Notes
+
+## 1.8.0
+- added trailing commas option
 
 ## 1.7.0
 - Added configuration option to control indention on multi-line imports.
