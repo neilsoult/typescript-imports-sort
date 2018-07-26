@@ -1,5 +1,5 @@
-import { DestructedImport, TypescriptImport } from './TypescriptImport';
 import * as vscode from 'vscode';
+import { DestructedImport, TypescriptImport } from './interfaces';
 
 const name = `((?!\\d)(?:(?!\\s)[$\\w\\u0080-\\uFFFF]|\\\\u[\\da-fA-F]{4}|\\\\u\\{[\\da-fA-F]+\\})+)`;
 const ws = `[\\s\\n\\r]`;
@@ -22,40 +22,49 @@ const importRegex = new RegExp(importRegexString, 'gm');
 // Group 4 - alias
 const destructingImportTokenRegex = new RegExp(destructingImportToken);
 
-export default function parseImportNodes(document: vscode.TextDocument) {
-    let source = document.getText();
+const parseDestructiveImports = (destructiveImports: string): DestructedImport[] => {
+
+    if (!destructiveImports) {
+
+        return null;
+
+    }
+
+    return destructiveImports.split(',')
+    .map((destructiveImport) => {
+
+        const match = destructingImportTokenRegex.exec(destructiveImport);
+        return {
+            alias: match[4],
+            importName: match[1]
+        };
+
+    });
+
+};
+
+export const parseImportNodes = (document: vscode.TextDocument) => {
+
+    const source = document.getText();
     importRegex.lastIndex = 0;
-    let imports: TypescriptImport[] = [];
+    const imports: TypescriptImport[] = [];
 
     let match;
     while (match = importRegex.exec(source)) {
+
         imports.push({
-            path: match[31],
             default: match[5] || match[18],
             namedImports: parseDestructiveImports(match[6] || match[19]),
             namespace: match[3],
+            path: match[31],
             range: new vscode.Range(
                 document.positionAt(match.index),
                 document.positionAt(importRegex.lastIndex)
-            ),
+            )
         });
+
     }
 
     return imports;
-}
 
-function parseDestructiveImports(destructiveImports: string): DestructedImport[] {
-    if (!destructiveImports) {
-        return null;
-    }
-
-    return destructiveImports
-        .split(',')
-        .map(destructiveImport => {
-            let match = destructingImportTokenRegex.exec(destructiveImport);
-            return {
-                importName: match[1],
-                alias: match[4],
-            };
-        });
-}
+};
