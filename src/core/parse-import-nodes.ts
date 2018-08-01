@@ -16,7 +16,7 @@ const importRegexString = `^import\\s+(${combinedImportTypes}\\s+from\\s+)?['"](
 // Group 3 - namespace import
 // Group 6 || Group 19 - destructing import group; requires further tokenizing
 // Group 31 - file path or package
-const importRegex = new RegExp(importRegexString, 'gm');
+const importRegex = new RegExp(importRegexString, 'g');
 
 // Group 1 - importName
 // Group 4 - alias
