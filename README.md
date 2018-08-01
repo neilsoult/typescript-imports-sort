@@ -41,6 +41,9 @@ This configurable extension allows you to sort all the imports in a *.ts or *.ts
   * `'path'` sorts by the import path, sorting relative-path imports above package imports
 * `typescript.extension.sortImports.sortOnSave`: If set to `true`, imports will be sorted whenever you save a file. Default: `false`
 
+## Inline Settings
+* You can use the flag `disable-sort-imports` in comments to disable sorting for that page. This is especially useful if you have the `sortOnSave` set to true
+
 ## Known Issues
 
 * This extension does not currently sort comments within the import block along with the import statements
@@ -52,6 +55,10 @@ This configurable extension allows you to sort all the imports in a *.ts or *.ts
 - Maybe none of these. ¯\_(ツ)_/¯
 
 ## Release Notes
+
+## 1.9.0
+- added inline flag `disable-sort-imports` to disable sorting imports for that page
+- more refactoring, code organization
 
 ## 1.8.0
 - added trailing commas option

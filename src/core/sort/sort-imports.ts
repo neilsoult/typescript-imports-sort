@@ -1,7 +1,7 @@
 import * as vscode from 'vscode';
-import { parseImportNodes } from './parse-import-nodes';
-import { processImports } from './process-imports';
-import { writeImports } from './write-imports';
+import { parseImportNodes } from '../parse-import-nodes';
+import { processImports } from '../process-imports';
+import { writeImports } from '../write-imports';
 
 export const sortImports = (document: vscode.TextDocument) => {
 

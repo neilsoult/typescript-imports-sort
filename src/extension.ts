@@ -1,8 +1,11 @@
 import * as vscode from 'vscode';
-import { isSupportedLanguage } from './is-supported-language';
-import { shouldEnableJavascript, shouldSortOnSave } from './options';
-import { sortInsideEditor } from './sort-inside-editor';
-import { sortOnSave } from './sort-on-save';
+import {
+    isSupportedLanguage,
+    shouldEnableJavascript,
+    shouldSortOnSave,
+    sortInsideEditor,
+    sortOnSave
+} from './core';
 // The module 'vscode' contains the VS Code extensibility API
 // Import the module and reference it with the alias vscode in your code below
 

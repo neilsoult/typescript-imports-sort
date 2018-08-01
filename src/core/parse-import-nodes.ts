@@ -22,6 +22,8 @@ const importRegex = new RegExp(importRegexString, 'gm');
 // Group 4 - alias
 const destructingImportTokenRegex = new RegExp(destructingImportToken);
 
+const disableSortRegex = new RegExp('(disable-sort-imports)', 'gm');
+
 const parseDestructiveImports = (destructiveImports: string): DestructedImport[] => {
 
     if (!destructiveImports) {
@@ -48,6 +50,12 @@ export const parseImportNodes = (document: vscode.TextDocument) => {
     const source = document.getText();
     importRegex.lastIndex = 0;
     const imports: TypescriptImport[] = [];
+
+    if (disableSortRegex.test(source)) {
+
+        return [];
+
+    }
 
     let match;
     while (match = importRegex.exec(source)) {
