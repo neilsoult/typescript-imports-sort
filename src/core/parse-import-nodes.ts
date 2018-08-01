@@ -16,13 +16,11 @@ const importRegexString = `^import\\s+(${combinedImportTypes}\\s+from\\s+)?['"](
 // Group 3 - namespace import
 // Group 6 || Group 19 - destructing import group; requires further tokenizing
 // Group 31 - file path or package
-const importRegex = new RegExp(importRegexString, 'g');
+const importRegex = new RegExp(importRegexString, 'gm');
 
 // Group 1 - importName
 // Group 4 - alias
 const destructingImportTokenRegex = new RegExp(destructingImportToken);
-
-const disableSortRegex = new RegExp('(disable-sort-imports)', 'gm');
 
 const parseDestructiveImports = (destructiveImports: string): DestructedImport[] => {
 
@@ -51,7 +49,7 @@ export const parseImportNodes = (document: vscode.TextDocument) => {
     importRegex.lastIndex = 0;
     const imports: TypescriptImport[] = [];
 
-    if (disableSortRegex.test(source)) {
+    if (/(disable-sort-imports)/g.test(source)) {
 
         return [];
 
