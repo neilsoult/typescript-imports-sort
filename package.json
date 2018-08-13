@@ -71,7 +71,7 @@
         },
         "typescript.extension.sortImports.maxLineLength": {
           "type": "number",
-          "description": "The maximum line length for single line import statements. Can override maxNamedImportsInSingleLine.",
+          "description": "The maximum line length for single line named import statements. Can override maxNamedImportsInSingleLine.",
           "default": 0
         },
         "typescript.extension.sortImports.maxNamedImportsInSingleLine": {

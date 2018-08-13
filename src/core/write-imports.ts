@@ -1,12 +1,15 @@
 import { NamedImport, TypescriptImport } from './interfaces';
 import * as options from './options';
 
-const generateDefaultImport = (namedImports: NamedImport[]) => {
+const generateDefaultImportString = (namedImports: NamedImport[], pre: string, post: string) => {
 
-    const singleLine = generateSingleLineImport(namedImports);
+    const singleLine = `${pre}${generateSingleLineImport(namedImports)}${post}`;
+    console.log('single line:', singleLine);
+    console.log('single line length', singleLine.length);
+    console.log('options', options.getMaxLineLength());
     if (options.getMaxLineLength() > 0 && singleLine.length > options.getMaxLineLength()) {
 
-        return generateMulilineImport(namedImports);
+        return `${pre}${generateMulilineImport(namedImports)}${post}`;
 
     }
 
@@ -36,17 +39,29 @@ const generateNamedImport = (namedImport: NamedImport): string => {
 
 };
 
-const generatedNamedImportGroup = (namedImports: NamedImport[]): string => {
+const generateNamedImportString = (namedImports: NamedImport[], pre: string, post: string) => {
 
     if (namedImports.length > options.getMaxNamedImportsPerSingleLine()) {
 
-        return generateMulilineImport(namedImports);
+        return `${pre}${generateMulilineImport(namedImports)}${post}`;
 
     }
 
-    return generateDefaultImport(namedImports);
+    return generateDefaultImportString(namedImports, pre, post);
 
 };
+
+// const generatedNamedImportGroup = (namedImports: NamedImport[]): string => {
+
+//     if (namedImports.length > options.getMaxNamedImportsPerSingleLine()) {
+
+//         return generateMulilineImport(namedImports);
+
+//     }
+
+//     return generateDefaultImport(namedImports);
+
+// };
 
 const generateSingleLineImport = (namedImports: NamedImport[]) => {
 
@@ -81,8 +96,9 @@ const getImportClauseString = (importClause: TypescriptImport): string => {
 
         if (importClause.namedImports) {
 
-            return `import ${importClause.default}, ${generatedNamedImportGroup(importClause.namedImports)} `
-                + `from ${path}${semicolon}`;
+            return generateNamedImportString(
+                importClause.namedImports, `import ${importClause.default}, `, ` from ${path}${semicolon}`
+            );
 
         }
 
@@ -90,7 +106,7 @@ const getImportClauseString = (importClause: TypescriptImport): string => {
 
     } else if (importClause.namedImports) {
 
-        return `import ${generatedNamedImportGroup(importClause.namedImports)} from ${path}${semicolon}`;
+        return generateNamedImportString(importClause.namedImports, `import `, ` from ${path}${semicolon}`);
 
     }
 
