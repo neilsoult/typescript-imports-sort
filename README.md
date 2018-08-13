@@ -23,6 +23,8 @@ This configurable extension allows you to sort all the imports in a *.ts or *.ts
   * `always` - always add trailing commas.
   * `singleLineOnly` - only add trailing commas to single line lists.
   * `multiLineOnly` - only add trailing commas to muti-line lists.
+* `typescript.extension.sortImports.maxLineLength`: The max character count allowed in a single line import statement. Can override `maxNamedImportsInSingleLine`. (This rule has precedence) Please Note: this only applies to single line imports, it does not check line length on multi-line import statements.
+  * Default: `0` (no max length)
 * `typescript.extension.sortImports.maxNamedImportsInSingleLine`: The number of named imports to allow on a single line. If a single import has more than this number, they will be broken up onto separate lines.
 * `typescript.extension.sortImports.multilineIndention`: Control when to add indentation to multi-line imports.
   * Default: `namesOnly`
@@ -55,6 +57,9 @@ This configurable extension allows you to sort all the imports in a *.ts or *.ts
 - Maybe none of these. ¯\_(ツ)_/¯
 
 ## Release Notes
+
+## 1.10.0
+- added `maxLineLength` option. This only applies to single-line imports and will take precedence over `maxNamedImportsInSingleLine`
 
 ## 1.9.0
 - added inline flag `disable-sort-imports` to disable sorting imports for that page

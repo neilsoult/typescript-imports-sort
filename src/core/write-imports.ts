@@ -1,6 +1,29 @@
 import { NamedImport, TypescriptImport } from './interfaces';
 import * as options from './options';
 
+const generateDefaultImport = (namedImports: NamedImport[]) => {
+
+    const singleLine = generateSingleLineImport(namedImports);
+    if (options.getMaxLineLength() > 0 && singleLine.length > options.getMaxLineLength()) {
+
+        return generateMulilineImport(namedImports);
+
+    }
+
+    return singleLine;
+
+};
+
+const generateMulilineImport = (namedImports: NamedImport[]) => {
+
+    const trailingCommaOnMultiLine = ['always', 'multiLineOnly'].includes(options.getTrailingCommaOption());
+
+    return `{${options.getNewLine()}`
+        + getJoinedNamedImportList(namedImports, true, trailingCommaOnMultiLine)
+        + `${options.getNewLine(true)}}`;
+
+};
+
 const generateNamedImport = (namedImport: NamedImport): string => {
 
     if (namedImport.alias) {
@@ -15,22 +38,29 @@ const generateNamedImport = (namedImport: NamedImport): string => {
 
 const generatedNamedImportGroup = (namedImports: NamedImport[]): string => {
 
-    const trailingComma = options.getTrailingCommaOption();
-    const trailingCommaOnMultiLine = ['always', 'multiLineOnly'].includes(trailingComma);
-    const trailingCommaOnSingleLine = ['always', 'singleLineOnly'].includes(trailingComma);
     if (namedImports.length > options.getMaxNamedImportsPerSingleLine()) {
 
-        return `{${options.getNewLine()}`
-            + getJoinedNamedImportList(namedImports, true, trailingCommaOnMultiLine)
-            + `${options.getNewLine(true)}}`;
-
-    } else if (options.getBracketWhitespace()) {
-
-        return `{ ${getJoinedNamedImportList(namedImports, false, trailingCommaOnSingleLine)} }`;
+        return generateMulilineImport(namedImports);
 
     }
 
-    return `{${getJoinedNamedImportList(namedImports, false, trailingCommaOnSingleLine)}}`;
+    return generateDefaultImport(namedImports);
+
+};
+
+const generateSingleLineImport = (namedImports: NamedImport[]) => {
+
+    const trailingCommaOnSingleLine = ['always', 'singleLineOnly'].includes(options.getTrailingCommaOption());
+    let pre = '{', post = '}';
+
+    if (options.getBracketWhitespace()) {
+
+        pre = '{ ';
+        post = ' }';
+
+    }
+
+    return `${pre}${getJoinedNamedImportList(namedImports, false, trailingCommaOnSingleLine)}${post}`;
 
 };
 

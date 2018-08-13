@@ -12,6 +12,12 @@ export const getBracketWhitespace = (): boolean => {
 
 };
 
+export const getMaxLineLength = (): number => {
+
+    return getExtensionConfig().get('maxLineLength');
+
+};
+
 export const getMaxNamedImportsPerSingleLine = (): number => {
 
     return getExtensionConfig().get('maxNamedImportsInSingleLine');
