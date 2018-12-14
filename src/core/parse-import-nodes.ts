@@ -7,7 +7,7 @@ const ws = `[\\s\\n\\r]`;
 const namespaceToken = `\\*\\s+as\\s+(${name})`;
 const defaultImportToken = name;
 const destructingImportToken = `(${name})(\\s+as\\s+(${name}))?`;
-const destructingImport = `{(${ws}*${destructingImportToken}(,${ws}*${destructingImportToken})*${ws}*)}`;
+const destructingImport = `{(${ws}*${destructingImportToken}(${ws}*,${ws}*${destructingImportToken})*${ws}*)}`;
 const defaultAndDestructingImport = `${defaultImportToken}${ws}*,${ws}*${destructingImport}`;
 const combinedImportTypes = `(${namespaceToken}|${defaultImportToken}|${destructingImport}|${defaultAndDestructingImport})`;
 const importRegexString = `^import\\s+(${combinedImportTypes}\\s+from\\s+)?['"]([@\\w\\\\/\.-]+)['"];?\\r?\\n?`;
@@ -58,6 +58,7 @@ export const parseImportNodes = (document: vscode.TextDocument) => {
     let match;
     while (match = importRegex.exec(source)) {
 
+        // console.log('import regex match', match);
         imports.push({
             default: match[5] || match[18],
             namedImports: parseDestructiveImports(match[6] || match[19]),
