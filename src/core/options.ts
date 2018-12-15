@@ -1,6 +1,12 @@
 import * as vscode from 'vscode';
+import {
+    ForceTrailingCommasOption,
+    MultilineIndentionOption,
+    PathSortOrderOption,
+    SortMethodOption
+} from './interfaces';
 
-const getExtensionConfig = () => {
+const getExtensionConfig = (): vscode.WorkspaceConfiguration => {
 
     return vscode.workspace.getConfiguration('typescript.extension.sortImports');
 
@@ -8,7 +14,7 @@ const getExtensionConfig = () => {
 
 export const getBracketWhitespace = (): boolean => {
 
-    return getExtensionConfig().get('bracketWhitespace') as boolean;
+    return getExtensionConfig().get('bracketWhitespace');
 
 };
 
@@ -24,7 +30,7 @@ export const getMaxNamedImportsPerSingleLine = (): number => {
 
 };
 
-const getMultilineIndention = (): string => {
+const getMultilineIndention = (): MultilineIndentionOption => {
 
     return getExtensionConfig().get('multilineIndention');
 
@@ -54,37 +60,37 @@ export const getNewLine = (
 
 export const getOmitSemicolon = (): boolean => {
 
-    return getExtensionConfig().get('omitSemicolon') as boolean;
+    return getExtensionConfig().get('omitSemicolon');
 
 };
 
-export const getPathSortOrdering = (): string[] => {
+export const getPathSortOrdering = (): PathSortOrderOption[] => {
 
-    return getExtensionConfig().get('pathSortOrder') as string[];
+    return getExtensionConfig().get('pathSortOrder');
 
 };
 
-export const getQuoteToken = (): string => {
+export const getQuoteToken = (): `"` | `'` => {
 
     switch (getExtensionConfig().get('quoteStyle')) {
 
         case 'double':
-            return '"';
+            return `"`;
         case 'single':
         default:
-            return '\'';
+            return `'`;
 
     }
 
 };
 
-export const getSortOption = (): string => {
+export const getSortOption = (): SortMethodOption => {
 
     return getExtensionConfig().get('sortMethod');
 
 };
 
-export const getTrailingCommaOption = (): string => {
+export const getTrailingCommaOption = (): ForceTrailingCommasOption => {
 
     return getExtensionConfig().get('forceTrailingCommas');
 
@@ -92,12 +98,12 @@ export const getTrailingCommaOption = (): string => {
 
 export const shouldEnableJavascript = (): boolean => {
 
-    return getExtensionConfig().get('enableJavascript') as boolean;
+    return getExtensionConfig().get('enableJavascript');
 
 };
 
 export const shouldSortOnSave = (): boolean => {
 
-    return getExtensionConfig().get('sortOnSave') as boolean;
+    return getExtensionConfig().get('sortOnSave');
 
 };
