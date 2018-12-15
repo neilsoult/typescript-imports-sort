@@ -8,18 +8,18 @@ export const processImports = (importClauses: TypescriptImport[]): TypescriptImp
 
     // map imports for easier sorting
     const mappedImports = importClauses.map(mapImports);
-    console.log('mapped imports foo', mappedImports);
+    // console.log('mapped imports', mappedImports);
     // sort
     if (options.getSortOption() === 'importName') {
 
-        console.log('importName is sort option');
+        // console.log('importName is sort option');
         return importNameSort(mappedImports)
         .filter(({ markForDelete }) => !markForDelete)
         .map(unmapImports);
 
     }
     // sortOptions 'path' and 'fileName' use the same sort ordering
-    console.log('sort option is not importName');
+    // console.log('sort option is not importName');
     return pathSort(mappedImports)
     .filter(({ markForDelete }) => !markForDelete)
     .map(unmapImports);

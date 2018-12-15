@@ -4,7 +4,7 @@ import * as options from '../options';
 
 export const pathSort = (mappedImports: MappedImport[]): MappedImport[] => {
 
-    console.log('pathSort');
+    // console.log('pathSort');
     return options.getPathSortOrdering()
     .reduce((imports: MappedImport[], sortOption: PathSortOrderOption) => {
 

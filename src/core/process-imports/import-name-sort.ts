@@ -5,7 +5,7 @@ import * as options from '../options';
 
 const otherSort = (a: MappedImport, b: MappedImport): number => {
 
-    console.log('otherSort');
+    // console.log('otherSort');
     const namedImportsCompare = sortByNamedImports(a, b);
     if (namedImportsCompare) {
 

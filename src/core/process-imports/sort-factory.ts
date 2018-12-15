@@ -19,7 +19,7 @@ const checkMarkedForDelete = ({ markForDelete: a }: MappedImport, { markForDelet
 
 const sortByFileName = (a: MappedImport, b: MappedImport): number => {
 
-    console.log('fileNameSort');
+    // console.log('fileNameSort');
     const fileNameCompareResult = compareCaseInsensitive(a.fileName, b.fileName);
     if (fileNameCompareResult) {
 
@@ -33,7 +33,7 @@ const sortByFileName = (a: MappedImport, b: MappedImport): number => {
 
 export const sortByPath = (a: MappedImport, b: MappedImport): number => {
 
-    console.log('sortByPath');
+    // console.log('sortByPath');
     const markedForDelete = checkMarkedForDelete(a, b);
     if (markedForDelete) {
 
