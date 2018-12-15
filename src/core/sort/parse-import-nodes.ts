@@ -1,8 +1,9 @@
 import * as vscode from 'vscode';
-import { DestructedImport, TypescriptImport } from './interfaces';
+import { DestructedImport, TypescriptImport } from '../interfaces';
 
 const name = `((?!\\d)(?:(?!\\s)[$\\w\\u0080-\\uFFFF]|\\\\u[\\da-fA-F]{4}|\\\\u\\{[\\da-fA-F]+\\})+)`;
-const ws = `[\\s\\n\\r]`;
+const ws = `\\s`;
+const spaceNoReturns = `[^\\S\\r\\n]`;
 
 const namespaceToken = `\\*\\s+as\\s+(${name})`;
 const defaultImportToken = name;
@@ -10,16 +11,18 @@ const destructingImportToken = `(${name})(\\s+as\\s+(${name}))?`;
 const destructingImport = `{(${ws}*${destructingImportToken}(${ws}*,${ws}*${destructingImportToken})*${ws}*)}`;
 const defaultAndDestructingImport = `${defaultImportToken}${ws}*,${ws}*${destructingImport}`;
 const combinedImportTypes = `(${namespaceToken}|${defaultImportToken}|${destructingImport}|${defaultAndDestructingImport})`;
-const importRegexString = `^import\\s+(${combinedImportTypes}\\s+from\\s+)?['"]([@\\w\\\\/\.-]+)['"];?\\r?\\n?`;
-
-// Group 5 || Group 18 - default import
-// Group 3 - namespace import
-// Group 6 || Group 19 - destructing import group; requires further tokenizing
-// Group 31 - file path or package
-const importRegex = new RegExp(importRegexString, 'gm');
+const inlineComment = `(${spaceNoReturns}*[\\/]{2}.*)?`;
+const importRegexString = `^import\\s+(${combinedImportTypes}\\s+from\\s+)?['"]([@\\w\\\\/\.-]+)['"];?${inlineComment}\\r?\\n?`;
 
 // Group 1 - importName
+// Group 3 - namespace import
 // Group 4 - alias
+// Group 5 || Group 18 - default import
+// Group 6 || Group 19 - destructing import group; requires further tokenizing
+// Group 31 - file path or package
+// Group 32 - inline comment
+const importRegex = new RegExp(importRegexString, 'gm');
+// console.log('regex', importRegexString);
 const destructingImportTokenRegex = new RegExp(destructingImportToken);
 
 const parseDestructiveImports = (destructiveImports: string): DestructedImport[] => {

@@ -4,9 +4,9 @@ import * as options from './options';
 const generateDefaultImportString = (namedImports: NamedImport[], pre: string, post: string) => {
 
     const singleLine = `${pre}${generateSingleLineImport(namedImports)}${post}`;
-    console.log('single line:', singleLine);
-    console.log('single line length', singleLine.length);
-    console.log('options', options.getMaxLineLength());
+    // console.log('single line:', singleLine);
+    // console.log('single line length', singleLine.length);
+    // console.log('options', options.getMaxLineLength());
     if (options.getMaxLineLength() > 0 && singleLine.length > options.getMaxLineLength()) {
 
         return `${pre}${generateMulilineImport(namedImports)}${post}`;

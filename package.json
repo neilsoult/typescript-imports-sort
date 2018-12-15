@@ -126,10 +126,11 @@
         "typescript.extension.sortImports.sortMethod": {
           "type": "string",
           "enum": [
+            "fileName",
             "path",
             "importName"
           ],
-          "description": "Whether to sort by the name of the import or the source path of the import",
+          "description": "Whether to sort by the name of the import, the source path, or the file name of the import",
           "default": "importName"
         },
         "typescript.extension.sortImports.sortOnSave": {
