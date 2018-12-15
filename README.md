@@ -55,9 +55,14 @@ This configurable extension allows you to sort all the imports in a *.ts or *.ts
 - Handle distinct blocks of imports separated by a blank line.
 - Handle comments within import blocks
 - Read settings from existing tslint configuration.
-- Maybe none of these. ¯\_(ツ)_/¯
+- Maybe none of these. ¯\\_(ツ)_/¯
 
 ## Release Notes
+
+## 1.11.0
+- added `fileName` option for `sortMethod`, as requested by [Issue #3](https://github.com/neilsoult/typescript-imports-sort/issues/3)
+- fixed [issue #4](https://github.com/neilsoult/typescript-imports-sort/issues/4). Extra spaces in named imports will now be sorted correctly
+- tweaked the regex to include trailing comments in the matcher (they still are not written to the output when sorted).
 
 ## 1.10.0
 - added `maxLineLength` option. This only applies to single-line imports and will take precedence over `maxNamedImportsInSingleLine`
