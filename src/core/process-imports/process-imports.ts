@@ -2,7 +2,7 @@ import { importNameSort } from './import-name-sort';
 import { mapImports, unmapImports } from './map-imports';
 import { pathSort } from './path-sort';
 import { TypescriptImport } from '../interfaces';
-import * as options from '../options';
+import { options } from '../options';
 
 export const processImports = (importClauses: TypescriptImport[]): TypescriptImport[] => {
 
@@ -10,7 +10,7 @@ export const processImports = (importClauses: TypescriptImport[]): TypescriptImp
     const mappedImports = importClauses.map(mapImports);
     // console.log('mapped imports', mappedImports);
     // sort
-    if (options.getSortOption() === 'importName') {
+    if (options.get('sortMethod') === 'importName') {
 
         // console.log('importName is sort option');
         return importNameSort(mappedImports)

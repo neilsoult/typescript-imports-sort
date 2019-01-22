@@ -2,7 +2,7 @@
   "name": "typescript-imports-sort",
   "displayName": "Typescript Imports Sort",
   "description": "Sorts import statements in Typescript code",
-  "version": "1.11.0",
+  "version": "1.12.0",
   "publisher": "nsoult",
   "license": "MIT",
   "icon": "images/icon.png",
@@ -77,7 +77,7 @@
         "typescript.extension.sortImports.maxNamedImportsInSingleLine": {
           "type": "number",
           "description": "The maximum number of named imports to include in a single line",
-          "default": 3
+          "default": 0
         },
         "typescript.extension.sortImports.multilineIndention": {
           "type": "string",

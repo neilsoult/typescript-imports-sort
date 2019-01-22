@@ -1,7 +1,7 @@
-import { compareCaseInsensitive } from './compare-case-insensitive';
 import { sortByPath, sortNamedImports } from './sort-factory';
 import { MappedImport } from '../interfaces';
-import * as options from '../options';
+import { options } from '../options';
+import { compareCaseInsensitive } from '../util';
 
 const otherSort = (a: MappedImport, b: MappedImport): number => {
 
@@ -80,7 +80,7 @@ const sortByPathSortOrdering = (
     { pathSortCategory: a }: MappedImport, { pathSortCategory: b }: MappedImport
 ): number => {
 
-    const sortOrder = options.getPathSortOrdering();
+    const sortOrder = options.get('pathSortOrder');
 
     return sortOrder.indexOf(a) - sortOrder.indexOf(b);
 

@@ -1,13 +1,15 @@
 import { NamedImport, TypescriptImport } from './interfaces';
-import * as options from './options';
+import { options } from './options';
+import { getNewLine, getQuoteToken } from './util';
 
 const generateDefaultImportString = (namedImports: NamedImport[], pre: string, post: string) => {
 
+    const maxLineLength = options.get('maxLineLength');
     const singleLine = `${pre}${generateSingleLineImport(namedImports)}${post}`;
     // console.log('single line:', singleLine);
     // console.log('single line length', singleLine.length);
     // console.log('options', options.getMaxLineLength());
-    if (options.getMaxLineLength() > 0 && singleLine.length > options.getMaxLineLength()) {
+    if (maxLineLength > 0 && singleLine.length > maxLineLength) {
 
         return `${pre}${generateMulilineImport(namedImports)}${post}`;
 
@@ -19,11 +21,11 @@ const generateDefaultImportString = (namedImports: NamedImport[], pre: string, p
 
 const generateMulilineImport = (namedImports: NamedImport[]) => {
 
-    const trailingCommaOnMultiLine = ['always', 'multiLineOnly'].includes(options.getTrailingCommaOption());
+    const trailingCommaOnMultiLine = ['always', 'multiLineOnly'].includes(options.get('forceTrailingCommas'));
 
-    return `{${options.getNewLine()}`
+    return `{${getNewLine()}`
         + getJoinedNamedImportList(namedImports, true, trailingCommaOnMultiLine)
-        + `${options.getNewLine(true)}}`;
+        + `${getNewLine(true)}}`;
 
 };
 
@@ -41,7 +43,8 @@ const generateNamedImport = (namedImport: NamedImport): string => {
 
 const generateNamedImportString = (namedImports: NamedImport[], pre: string, post: string) => {
 
-    if (namedImports.length > options.getMaxNamedImportsPerSingleLine()) {
+    const maxImports = options.get('maxNamedImportsInSingleLine');
+    if (namedImports.length > maxImports && maxImports > 0) {
 
         return `${pre}${generateMulilineImport(namedImports)}${post}`;
 
@@ -65,10 +68,10 @@ const generateNamedImportString = (namedImports: NamedImport[], pre: string, pos
 
 const generateSingleLineImport = (namedImports: NamedImport[]) => {
 
-    const trailingCommaOnSingleLine = ['always', 'singleLineOnly'].includes(options.getTrailingCommaOption());
+    const trailingCommaOnSingleLine = ['always', 'singleLineOnly'].includes(options.get('forceTrailingCommas'));
     let pre = '{', post = '}';
 
-    if (options.getBracketWhitespace()) {
+    if (options.get('bracketWhitespace')) {
 
         pre = '{ ';
         post = ' }';
@@ -83,7 +86,7 @@ const getImportClauseString = (importClause: TypescriptImport): string => {
 
     const path = getPath(importClause);
     let semicolon = '';
-    if (!options.getOmitSemicolon()) {
+    if (!options.get('omitSemicolon')) {
 
         semicolon = ';';
 
@@ -117,14 +120,14 @@ const getImportClauseString = (importClause: TypescriptImport): string => {
 const getJoinedNamedImportList = (namedImports: NamedImport[], isMultline: boolean, addTrailingComma: boolean) => {
 
     const generatedNamedImports = namedImports.map(generateNamedImport);
-    const joiner = isMultline ? `,${options.getNewLine()}` : ', ';
+    const joiner = isMultline ? `,${getNewLine()}` : ', ';
     return generatedNamedImports.join(joiner) + (addTrailingComma ? ',' : '');
 
 };
 
 const getPath = (importClause: TypescriptImport): string => {
 
-    const quote = options.getQuoteToken();
+    const quote = getQuoteToken();
     return `${quote}${importClause.path}${quote}`;
 
 };

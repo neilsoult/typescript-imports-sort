@@ -9,8 +9,6 @@ Sort import statements in Typescript code
 
 This configurable extension allows you to sort all the imports in a *.ts or *.tsx file.
 
-![Sorting imports](images/example.gif)
-
 > Tip: You can access this functionality either from the context menu, or simply pressing 'F10'
 
 ## Extension Settings
@@ -26,6 +24,7 @@ This configurable extension allows you to sort all the imports in a *.ts or *.ts
 * `typescript.extension.sortImports.maxLineLength`: The max character count allowed in a single line named import statement. Can override `maxNamedImportsInSingleLine`. (This rule has precedence) Please Note: this only applies to single line named imports, it does not check line length on multi-line import statements or default imports.
   * Default: `0` (no max length)
 * `typescript.extension.sortImports.maxNamedImportsInSingleLine`: The number of named imports to allow on a single line. If a single import has more than this number, they will be broken up onto separate lines.
+    * Default: `0` (ignore rule)
 * `typescript.extension.sortImports.multilineIndention`: Control when to add indentation to multi-line imports.
   * Default: `namesOnly`
   * `none` - do not add indentation to multi-line imports.
@@ -58,6 +57,10 @@ This configurable extension allows you to sort all the imports in a *.ts or *.ts
 - Maybe none of these. ¯\\_(ツ)_/¯
 
 ## Release Notes
+
+## 1.12.0
+- `maxNamedImportsInSingleLine` will now be ignored if value is 0
+- refactored code; created interface for options
 
 ## 1.11.0
 - added `fileName` option for `sortMethod`, as requested by [Issue #3](https://github.com/neilsoult/typescript-imports-sort/issues/3)

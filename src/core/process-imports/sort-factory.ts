@@ -1,6 +1,6 @@
 import { compareCaseInsensitive } from './compare-case-insensitive';
 import { MappedImport, NamedImport } from '../interfaces';
-import * as options from '../options';
+import { options } from '../options';
 
 const checkMarkedForDelete = ({ markForDelete: a }: MappedImport, { markForDelete: b }: MappedImport): number => {
 
@@ -64,7 +64,7 @@ export const sortByPath = (a: MappedImport, b: MappedImport): number => {
 
 export const sortFactory = (): (a: MappedImport, b: MappedImport) => number => {
 
-    switch (options.getSortOption()) {
+    switch (options.get('sortMethod')) {
 
         case 'fileName':
             return sortByFileName;

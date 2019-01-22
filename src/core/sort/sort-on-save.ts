@@ -1,6 +1,6 @@
 import * as vscode from 'vscode';
 import { sortImports } from './sort-imports';
-import { isSupportedLanguage } from '../is-supported-language';
+import { isSupportedLanguage } from '../util';
 
 export const sortOnSave = (event: vscode.TextDocumentWillSaveEvent) => {
 

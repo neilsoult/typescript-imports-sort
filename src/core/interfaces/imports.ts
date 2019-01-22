@@ -1,11 +1,12 @@
 import * as vscode from 'vscode';
-
-export type DestructedImport = NamedImport;
+import { PathSortOrderOption } from './options';
 
 export interface NamedImport {
     importName: string;
     alias?: string;
 }
+
+export type DestructedImport = NamedImport;
 
 export interface TypescriptImport {
     path: string;
@@ -22,8 +23,3 @@ export interface MappedImport {
     markForDelete?: boolean;
     pathSortCategory?: PathSortOrderOption;
 }
-
-export type ForceTrailingCommasOption = 'never' | 'always' | 'singleLineOnly' | 'multiLineOnly';
-export type MultilineIndentionOption = 'none' | 'namesOnly' | 'namesAndPath';
-export type PathSortOrderOption = 'package' | 'relativeUpLevel' | 'relativeDownLevel';
-export type SortMethodOption = 'importName' | 'fileName' | 'path';

@@ -1,11 +1,11 @@
 import { sortFactory } from './sort-factory';
 import { MappedImport, PathSortOrderOption } from '../interfaces';
-import * as options from '../options';
+import { options } from '../options';
 
 export const pathSort = (mappedImports: MappedImport[]): MappedImport[] => {
 
     // console.log('pathSort');
-    return options.getPathSortOrdering()
+    return options.get('pathSortOrder')
     .reduce((imports: MappedImport[], sortOption: PathSortOrderOption) => {
 
         return [
