@@ -1,6 +1,6 @@
-import { compareCaseInsensitive } from './compare-case-insensitive';
 import { MappedImport, NamedImport } from '../interfaces';
 import { options } from '../options';
+import { compareCaseInsensitive } from '../util';
 
 const checkMarkedForDelete = ({ markForDelete: a }: MappedImport, { markForDelete: b }: MappedImport): number => {
 
