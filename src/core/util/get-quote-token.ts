@@ -1,4 +1,4 @@
-import { options } from '../options';
+import { options } from '../options/index';
 
 export const getQuoteToken = (): `"` | `'` => {
 

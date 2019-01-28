@@ -1,7 +1,7 @@
 import { sortByPath, sortNamedImports } from './sort-factory';
 import { MappedImport } from '../interfaces';
-import { options } from '../options';
-import { compareCaseInsensitive } from '../util';
+import { options } from '../options/index';
+import { compareCaseInsensitive } from '../util/index';
 
 const otherSort = (a: MappedImport, b: MappedImport): number => {
 

@@ -1,6 +1,6 @@
 import { NamedImport, TypescriptImport } from './interfaces';
-import { options } from './options';
-import { getNewLine, getQuoteToken } from './util';
+import { options } from './options/index';
+import { getNewLine, getQuoteToken } from './util/index';
 
 const generateDefaultImportString = (namedImports: NamedImport[], pre: string, post: string) => {
 
