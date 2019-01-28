@@ -58,6 +58,9 @@ This configurable extension allows you to sort all the imports in a *.ts or *.ts
 
 ## Release Notes
 
+## 1.12.1
+- fixed import bug.
+
 ## 1.12.0
 - `maxNamedImportsInSingleLine` will now be ignored if value is 0
 - refactored code; created interface for options
