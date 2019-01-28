@@ -1,7 +1,7 @@
 import * as vscode from 'vscode';
-import { options } from './core/options';
-import { sortInsideEditor, sortOnSave } from './core/sort';
-import { isSupportedLanguage } from './core/util';
+import { options } from './core/options/index';
+import { sortInsideEditor, sortOnSave } from './core/sort/index';
+import { isSupportedLanguage } from './core/util/index';
 
 let sortOnSaveDisposer: vscode.Disposable;
 

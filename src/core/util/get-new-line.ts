@@ -1,5 +1,5 @@
 import * as vscode from 'vscode';
-import { options } from '../options';
+import { options } from '../options/index';
 
 export const getNewLine = (
     isEnd: boolean = false, editor: vscode.TextEditor = vscode.window.activeTextEditor

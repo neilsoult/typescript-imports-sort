@@ -2,7 +2,7 @@ import { importNameSort } from './import-name-sort';
 import { mapImports, unmapImports } from './map-imports';
 import { pathSort } from './path-sort';
 import { TypescriptImport } from '../interfaces';
-import { options } from '../options';
+import { options } from '../options/index';
 
 export const processImports = (importClauses: TypescriptImport[]): TypescriptImport[] => {
 

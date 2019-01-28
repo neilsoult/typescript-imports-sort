@@ -1,6 +1,6 @@
 import { sortFactory } from './sort-factory';
 import { MappedImport, PathSortOrderOption } from '../interfaces';
-import { options } from '../options';
+import { options } from '../options/index';
 
 export const pathSort = (mappedImports: MappedImport[]): MappedImport[] => {
 
