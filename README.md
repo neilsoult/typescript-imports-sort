@@ -58,6 +58,10 @@ This configurable extension allows you to sort all the imports in a *.ts or *.ts
 
 ## Release Notes
 
+## 1.13.0
+- added support for tilde (`~`) character starting import path strings, as requested by [Issue #9](https://github.com/neilsoult/typescript-imports-sort/issues/9)
+- updated packages
+
 ## 1.12.1
 - fixed import bug.
 
