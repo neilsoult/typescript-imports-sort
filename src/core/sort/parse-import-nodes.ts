@@ -12,7 +12,7 @@ const destructingImport = `{(${ws}*${destructingImportToken}(${ws}*,${ws}*${dest
 const defaultAndDestructingImport = `${defaultImportToken}${ws}*,${ws}*${destructingImport}`;
 const combinedImportTypes = `(${namespaceToken}|${defaultImportToken}|${destructingImport}|${defaultAndDestructingImport})`;
 const inlineComment = `(${spaceNoReturns}*[\\/]{2}.*)?`;
-const importRegexString = `^import\\s+(${combinedImportTypes}\\s+from\\s+)?['"]([@\\w\\\\/\.-]+)['"];?${inlineComment}\\r?\\n?`;
+const importRegexString = `^import\\s+(${combinedImportTypes}\\s+from\\s+)?['"]([~@\\w\\\\/\.-]+)['"];?${inlineComment}\\r?\\n?`;
 
 // Group 1 - importName
 // Group 3 - namespace import
