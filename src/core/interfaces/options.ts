@@ -12,6 +12,7 @@ export interface ExtensionOptions {
     multilineIndention: MultilineIndentionOption;
     omitSemicolon: boolean;
     pathSortOrder: PathSortOrderOption[];
+    pathSortOrderOverride: string[];
     quoteStyle: 'double' | 'single';
     sortMethod: SortMethodOption;
     sortOnSave: boolean;

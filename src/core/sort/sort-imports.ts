@@ -1,11 +1,11 @@
 import * as vscode from 'vscode';
 import { parseImportNodes } from './parse-import-nodes';
-import { processImports } from '../process-imports';
+import { processImports, processImportsOverrides } from '../process-imports';
 import { writeImports } from '../write-imports';
 
 export const sortImports = (document: vscode.TextDocument) => {
 
-    const imports = processImports(parseImportNodes(document));
+    const imports = processImportsOverrides(processImports(parseImportNodes(document)));
     const sortedImportText = writeImports(imports);
     const edits: vscode.TextEdit[] = imports.map((importClause) => {
 
