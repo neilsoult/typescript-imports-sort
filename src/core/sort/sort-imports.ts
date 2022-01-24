@@ -19,16 +19,21 @@ export const sortImports = (document: vscode.TextDocument) => {
 
 };
 
-function getImportsStartPosition(document: vscode.TextDocument) {
+const getImportsStartPosition = (document: vscode.TextDocument) => {
+
     let importStartIndex = 0;
     for (let index = 0; index < document.lineCount; index++) {
-        const line = document.lineAt(index);
 
-        if ( line.text.startsWith('import')) {
+        const line = document.lineAt(index);
+        if (line.text.startsWith('import')) {
+
             importStartIndex = index;
             break;
+
         }
+
     }
-    
+
     return new vscode.Position(importStartIndex, 0);
-}
+
+};
