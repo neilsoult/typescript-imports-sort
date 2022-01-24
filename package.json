@@ -2,7 +2,7 @@
   "name": "typescript-imports-sort",
   "displayName": "Typescript Imports Sort",
   "description": "Sorts import statements in Typescript code",
-  "version": "1.13.0",
+  "version": "1.14.0",
   "publisher": "nsoult",
   "license": "MIT",
   "icon": "images/icon.png",
@@ -113,6 +113,15 @@
             "relativeUpLevel",
             "package"
           ]
+        },
+        "typescript.extension.sortImports.pathSortOrderOverride": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true,
+          "description": "When sorting imports, this controls which packages should be excluded from the system, and instead moved to the top of the import list in order, packages should be expressed by path",
+          "default": []
         },
         "typescript.extension.sortImports.quoteStyle": {
           "type": "string",

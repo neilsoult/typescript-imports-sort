@@ -36,6 +36,7 @@ This configurable extension allows you to sort all the imports in a *.ts or *.ts
   * `package` - Any import path that does not begin with `.`
   * `relativeUpLevel` - Any import path that begins with `../`
   * `relativeDownLevel` - Any import path that begins with `./`
+* `typescript.extension.sortImports.pathSortOrderOverride`: An array describing the order of packages that when sorting imports, should be excluded from the system, and instead moved to the top of the import list in order, packages should be expressed by path.
 * `typescript.extension.sortImports.quoteStyle`: The type of quotation mark to use. `single`(default) or `double`.
 * `typescript.extension.sortImports.sortMethod`: The method to use for sorting the imports.
   * `'importName'`(default) sorts by the type and name of the import. Namespace imports are first, followed by default imports, named imports, and unnamed imports.
@@ -57,6 +58,10 @@ This configurable extension allows you to sort all the imports in a *.ts or *.ts
 - Maybe none of these. ¯\\_(ツ)_/¯
 
 ## Release Notes
+
+## 1.14.0
+- add support for overriding the import sort order, as requred by [Issue #](https://github.com/neilsoult/typescript-imports-sort/issues/12)
+- add support for comments or code before the import block, as requred by [Issue #](https://github.com/neilsoult/typescript-imports-sort/issues/12)
 
 ## 1.13.0
 - added support for tilde (`~`) character starting import path strings, as requested by [Issue #9](https://github.com/neilsoult/typescript-imports-sort/issues/9)
