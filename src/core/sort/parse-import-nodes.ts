@@ -12,15 +12,17 @@ const destructingImport = `{(${ws}*${destructingImportToken}(${ws}*,${ws}*${dest
 const defaultAndDestructingImport = `${defaultImportToken}${ws}*,${ws}*${destructingImport}`;
 const combinedImportTypes = `(${namespaceToken}|${defaultImportToken}|${destructingImport}|${defaultAndDestructingImport})`;
 const inlineComment = `(${spaceNoReturns}*[\\/]{2}.*)?`;
-const importRegexString = `^import\\s+(${combinedImportTypes}\\s+from\\s+)?['"]([~@\\w\\\\/\.-]+)['"];?${inlineComment}\\r?\\n?`;
+const importRegexString = `^import(\\s+type)?\\s+(${combinedImportTypes}\\s+from\\s+)?['"]([~@\\w\\\\/\.-]+)['"];?${inlineComment}\\r?\\n?`;
 
-// Group 1 - importName
-// Group 3 - namespace import
-// Group 4 - alias
-// Group 5 || Group 18 - default import
-// Group 6 || Group 19 - destructing import group; requires further tokenizing
-// Group 31 - file path or package
-// Group 32 - inline comment
+// Group 1 - type keyword
+// Group 2 - importName
+// Group 4 - namespace import
+// Group 5 - alias
+// Group 6 || Group 19 - default import
+// Group 7 || Group 20 - destructing import group; requires further tokenizing
+// Group 32 - file path or package
+// Group 33 - inline comment
+
 const importRegex = new RegExp(importRegexString, 'gm');
 // console.log('regex', importRegexString);
 const destructingImportTokenRegex = new RegExp(destructingImportToken);
@@ -63,10 +65,11 @@ export const parseImportNodes = (document: vscode.TextDocument) => {
 
         // console.log('import regex match', match);
         imports.push({
-            default: match[5] || match[18],
-            namedImports: parseDestructiveImports(match[6] || match[19]),
-            namespace: match[3],
-            path: match[31],
+            default: match[6] || match[19],
+            hasTypeKeyword: !!match[1],
+            namedImports: parseDestructiveImports(match[7] || match[20]),
+            namespace: match[4],
+            path: match[32],
             range: new vscode.Range(
                 document.positionAt(match.index),
                 document.positionAt(importRegex.lastIndex)

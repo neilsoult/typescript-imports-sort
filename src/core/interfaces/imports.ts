@@ -2,18 +2,19 @@ import * as vscode from 'vscode';
 import { PathSortOrderOption } from './options';
 
 export interface NamedImport {
-    importName: string;
     alias?: string;
+    importName: string;
 }
 
 export type DestructedImport = NamedImport;
 
 export interface TypescriptImport {
-    path: string;
-    range: vscode.Range;
     default?: string;
+    hasTypeKeyword: boolean;
     namedImports?: DestructedImport[];
     namespace?: string;
+    path: string;
+    range: vscode.Range;
 }
 
 export interface MappedImport {

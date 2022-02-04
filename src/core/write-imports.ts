@@ -85,6 +85,7 @@ const generateSingleLineImport = (namedImports: NamedImport[]) => {
 const getImportClauseString = (importClause: TypescriptImport): string => {
 
     const path = getPath(importClause);
+    const prefix = `import ${importClause.hasTypeKeyword ? 'type ' : ''}`;
     let semicolon = '';
     if (!options.get('omitSemicolon')) {
 
@@ -93,27 +94,27 @@ const getImportClauseString = (importClause: TypescriptImport): string => {
     }
     if (importClause.namespace) {
 
-        return `import * as ${importClause.namespace} from ${path}${semicolon}`;
+        return `${prefix}* as ${importClause.namespace} from ${path}${semicolon}`;
 
     } else if (importClause.default) {
 
         if (importClause.namedImports) {
 
             return generateNamedImportString(
-                importClause.namedImports, `import ${importClause.default}, `, ` from ${path}${semicolon}`
+                importClause.namedImports, `${prefix}${importClause.default}, `, ` from ${path}${semicolon}`
             );
 
         }
 
-        return `import ${importClause.default} from ${path}${semicolon}`;
+        return `${prefix}${importClause.default} from ${path}${semicolon}`;
 
     } else if (importClause.namedImports) {
 
-        return generateNamedImportString(importClause.namedImports, `import `, ` from ${path}${semicolon}`);
+        return generateNamedImportString(importClause.namedImports, prefix, ` from ${path}${semicolon}`);
 
     }
 
-    return `import ${path}${semicolon}`;
+    return `${prefix}${path}${semicolon}`;
 
 };
 

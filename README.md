@@ -59,6 +59,8 @@ This configurable extension allows you to sort all the imports in a *.ts or *.ts
 
 ## Release Notes
 
+## 1.15.0
+- add support for type keyword from [typescript 3.8](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-8.html)
 ## 1.14.0
 - add support for overriding the import sort order, as requred by [Issue #](https://github.com/neilsoult/typescript-imports-sort/issues/12)
 - add support for comments or code before the import block, as requred by [Issue #](https://github.com/neilsoult/typescript-imports-sort/issues/12)
