@@ -2,7 +2,7 @@
   "name": "typescript-imports-sort",
   "displayName": "Typescript Imports Sort",
   "description": "Sorts import statements in Typescript code",
-  "version": "1.15.0",
+  "version": "1.16.0",
   "publisher": "nsoult",
   "license": "MIT",
   "icon": "images/icon.png",
