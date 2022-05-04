@@ -13,15 +13,11 @@ export const processImports = (importClauses: TypescriptImport[]): TypescriptImp
     if (options.get('sortMethod') === 'importName') {
 
         // console.log('importName is sort option');
-        return importNameSort(mappedImports)
-        .filter(({ markForDelete }) => !markForDelete)
-        .map(unmapImports);
+        return importNameSort(mappedImports).map(unmapImports);
 
     }
     // sortOptions 'path' and 'fileName' use the same sort ordering
     // console.log('sort option is not importName');
-    return pathSort(mappedImports)
-    .filter(({ markForDelete }) => !markForDelete)
-    .map(unmapImports);
+    return pathSort(mappedImports).map(unmapImports);
 
 };

@@ -44,8 +44,8 @@ export const mapImports = (importClause: TypescriptImport, idx: number): MappedI
 
 };
 
-export const unmapImports = ({ importClause }: MappedImport): TypescriptImport => {
+export const unmapImports = ({ importClause, markForDelete }: MappedImport): TypescriptImport => {
 
-    return importClause;
+    return { ...importClause, markForDelete };
 
 };

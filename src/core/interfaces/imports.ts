@@ -11,6 +11,7 @@ export type DestructedImport = NamedImport;
 export interface TypescriptImport {
     default?: string;
     hasTypeKeyword: boolean;
+    markForDelete?: boolean;
     namedImports?: DestructedImport[];
     namespace?: string;
     path: string;

@@ -137,7 +137,7 @@ export const writeImports = (importClauses: TypescriptImport[]): string => {
 
     if (importClauses && importClauses.length) {
 
-        return importClauses.map(getImportClauseString).join('\n') + '\n';
+        return importClauses.filter(({ markForDelete }) => !markForDelete).map(getImportClauseString).join('\n') + '\n';
 
     }
 

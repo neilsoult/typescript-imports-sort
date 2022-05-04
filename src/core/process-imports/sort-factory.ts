@@ -1,5 +1,6 @@
 import { MappedImport, NamedImport } from '../interfaces';
 import { options } from '../options/index';
+import { importPathsMatch } from '../util/import-paths-match';
 import { compareCaseInsensitive } from '../util/index';
 
 const checkMarkedForDelete = ({ markForDelete: a }: MappedImport, { markForDelete: b }: MappedImport): number => {
@@ -46,18 +47,32 @@ export const sortByPath = (a: MappedImport, b: MappedImport): number => {
         return pathCompareResult;
 
     }
-    // fall through means paths are the same - combined named imports
-    if (a.importClause.namedImports && b.importClause.namedImports) {
+    if (importPathsMatch(a, b)) {
 
-        const uniqueNamedImports = b.importClause.namedImports.filter((namedImport) => {
+        if (a.importClause.hasTypeKeyword || b.importClause.hasTypeKeyword) {
 
-            return a.importClause.namedImports.includes(namedImport);
+            return 1;
 
-        });
-        a.importClause.namedImports = [...a.importClause.namedImports, ...uniqueNamedImports].sort(sortNamedImports);
+        }
+        if (a.importClause.namedImports && b.importClause.namedImports) {
+
+            // console.log('get unique named imports');
+            // console.log(b.importClause.namedImports);
+            // console.log(a.importClause.namedImports);
+            const uniqueNamedImports = b.importClause.namedImports.filter(({ importName }) => {
+
+                return !a.importClause.namedImports.some(({ importName: name }) => importName === name);
+
+            });
+            // console.log({ uniqueNamedImports });
+            a.importClause.namedImports = [...a.importClause.namedImports, ...uniqueNamedImports]
+            .sort(sortNamedImports);
+            b.markForDelete = true;
+            return 1;
+
+        }
 
     }
-    b.markForDelete = true;
     return -1;
 
 };
