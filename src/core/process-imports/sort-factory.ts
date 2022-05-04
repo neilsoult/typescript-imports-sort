@@ -2,6 +2,7 @@ import { MappedImport, NamedImport } from '../interfaces';
 import { options } from '../options/index';
 import { importPathsMatch } from '../util/import-paths-match';
 import { compareCaseInsensitive } from '../util/index';
+import { onlyOneHasTypeKeyword } from '../util/only-one-has-type-keyword';
 
 const checkMarkedForDelete = ({ markForDelete: a }: MappedImport, { markForDelete: b }: MappedImport): number => {
 
@@ -49,7 +50,7 @@ export const sortByPath = (a: MappedImport, b: MappedImport): number => {
     }
     if (importPathsMatch(a, b)) {
 
-        if (a.importClause.hasTypeKeyword || b.importClause.hasTypeKeyword) {
+        if (onlyOneHasTypeKeyword(a, b)) {
 
             return 1;
 

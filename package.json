@@ -2,7 +2,7 @@
   "name": "typescript-imports-sort",
   "displayName": "Typescript Imports Sort",
   "description": "Sorts import statements in Typescript code",
-  "version": "1.16.0",
+  "version": "1.16.1",
   "publisher": "nsoult",
   "license": "MIT",
   "icon": "images/icon.png",
@@ -15,7 +15,7 @@
     "url": "https://github.com/neilsoult/typescript-imports-sort.git"
   },
   "engines": {
-    "vscode": "^1.32.0"
+    "vscode": "^1.66.0"
   },
   "categories": [
     "Formatters"

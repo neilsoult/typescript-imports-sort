@@ -59,6 +59,11 @@ This configurable extension allows you to sort all the imports in a *.ts or *.ts
 
 ## Release Notes
 
+## 1.16.1
+- fixed combining `import type` named imports when path is the same
+## 1.16.0
+- fixed issue where duplicate import paths were not removed
+- support for `import type` syntax
 ## 1.15.0
 - add support for type keyword from [typescript 3.8](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-8.html)
 ## 1.14.0
