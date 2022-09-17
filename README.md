@@ -60,8 +60,8 @@ This configurable extension allows you to sort all the imports in a *.ts or *.ts
 ## Release Notes
 
 ## 1.17.0
-- fixes trailing comma support [Issue #](https://github.com/neilsoult/typescript-imports-sort/issues/7), [Issue #](https://github.com/neilsoult/typescript-imports-sort/issues/14)
-- fixes pathSortOrderOverride bug [Issue #](https://github.com/neilsoult/typescript-imports-sort/issues/16)
+- fixes trailing comma support [Issue #7](https://github.com/neilsoult/typescript-imports-sort/issues/7), [Issue #14](https://github.com/neilsoult/typescript-imports-sort/issues/14)
+- fixes pathSortOrderOverride bug [Issue #16](https://github.com/neilsoult/typescript-imports-sort/issues/16)
 ## 1.16.1
 - fixed combining `import type` named imports when path is the same
 ## 1.16.0
@@ -70,8 +70,8 @@ This configurable extension allows you to sort all the imports in a *.ts or *.ts
 ## 1.15.0
 - add support for type keyword from [typescript 3.8](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-8.html)
 ## 1.14.0
-- add support for overriding the import sort order, as requred by [Issue #](https://github.com/neilsoult/typescript-imports-sort/issues/12)
-- add support for comments or code before the import block, as requred by [Issue #](https://github.com/neilsoult/typescript-imports-sort/issues/12)
+- add support for overriding the import sort order, as requred by [Issue #12](https://github.com/neilsoult/typescript-imports-sort/issues/12)
+- add support for comments or code before the import block, as requred by [Issue #12](https://github.com/neilsoult/typescript-imports-sort/issues/12)
 
 ## 1.13.0
 - added support for tilde (`~`) character starting import path strings, as requested by [Issue #9](https://github.com/neilsoult/typescript-imports-sort/issues/9)
