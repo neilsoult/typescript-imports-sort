@@ -1,23 +1,24 @@
 import { TypescriptImport } from '../interfaces';
 import { options } from '../options/index';
 
+const pathMatchInOverrides = (path: string) => {
+
+    return options.get('pathSortOrderOverride').includes(path);
+
+};
+
 export const processImportsOverrides = (importClauses: TypescriptImport[]): TypescriptImport[] => {
 
     if (options.get('pathSortOrderOverride') && options.get('pathSortOrderOverride').length > 0) {
 
-        options.get('pathSortOrderOverride').reverse().forEach((override) => {
+        if (importClauses.some(({ path }) => pathMatchInOverrides(path))) {
 
-            if (importClauses.some(({ path }) => path === override)) {
+            const originalImports = importClauses.filter(({ path }) => !pathMatchInOverrides(path));
+            const priorityImports = importClauses.filter(({ path }) => pathMatchInOverrides(path));
 
-                const originalImports = importClauses.filter(({ path }) => path !== override);
-                const priorityImports = importClauses.filter(({ path }) => path === override);
+            importClauses = [...priorityImports, ...originalImports];
 
-                importClauses = [...priorityImports, ...originalImports];
-
-            }
-
-        });
-
+        }
     }
 
     return importClauses;
