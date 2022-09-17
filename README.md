@@ -59,6 +59,9 @@ This configurable extension allows you to sort all the imports in a *.ts or *.ts
 
 ## Release Notes
 
+## 1.17.0
+- fixes trailing comma support [Issue #](https://github.com/neilsoult/typescript-imports-sort/issues/7), [Issue #](https://github.com/neilsoult/typescript-imports-sort/issues/14)
+- fixes pathSortOrderOverride bug [Issue #](https://github.com/neilsoult/typescript-imports-sort/issues/16)
 ## 1.16.1
 - fixed combining `import type` named imports when path is the same
 ## 1.16.0
