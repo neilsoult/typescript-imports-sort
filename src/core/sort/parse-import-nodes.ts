@@ -8,7 +8,7 @@ const spaceNoReturns = `[^\\S\\r\\n]`;
 const namespaceToken = `\\*\\s+as\\s+(${name})`;
 const defaultImportToken = name;
 const destructingImportToken = `(${name})(\\s+as\\s+(${name}))?`;
-const destructingImport = `{(${ws}*${destructingImportToken}(${ws}*,${ws}*${destructingImportToken})*${ws}*)}`;
+const destructingImport = `{(${ws}*${destructingImportToken}(${ws}*,${ws}*${destructingImportToken})*${ws}*,?${ws}*)}`;
 const defaultAndDestructingImport = `${defaultImportToken}${ws}*,${ws}*${destructingImport}`;
 const combinedImportTypes = `(${namespaceToken}|${defaultImportToken}|${destructingImport}|${defaultAndDestructingImport})`;
 const inlineComment = `(${spaceNoReturns}*[\\/]{2}.*)?`;
@@ -39,12 +39,10 @@ const parseDestructiveImports = (destructiveImports: string): DestructedImport[]
     .map((destructiveImport) => {
 
         const match = destructingImportTokenRegex.exec(destructiveImport);
-        return {
-            alias: match[4],
-            importName: match[1]
-        };
+        return !match ? null : { alias: match[4], importName: match[1] };
 
-    });
+    })
+    .filter((destructiveImport) => !!destructiveImport?.importName);
 
 };
 
