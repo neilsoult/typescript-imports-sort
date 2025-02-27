@@ -64,6 +64,10 @@ export const sortFactory = (): ((a: MappedImport, b: MappedImport) => number) =>
     }
 };
 
-export const sortNamedImports = ({ importName: a }: NamedImport, { importName: b }: NamedImport): number => {
+export const sortNamedImports = (first: NamedImport, second: NamedImport): number => {
+    const getImportName = ({ hasTypeKeyword, importName }: NamedImport) => hasTypeKeyword
+        ? importName.split('type ')[1] : importName;
+    const a = getImportName(first);
+    const b = getImportName(second);
     return compareCaseInsensitive(a, b);
 };

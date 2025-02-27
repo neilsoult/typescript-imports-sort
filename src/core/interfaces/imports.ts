@@ -3,6 +3,7 @@ import { PathSortOrderOption } from './options';
 
 export interface NamedImport {
     alias?: string;
+    hasTypeKeyword: boolean;
     importName: string;
 }
 

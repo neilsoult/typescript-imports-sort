@@ -1,5 +1,9 @@
 # Change Log
 
+## [1.16.2]
+
+- fixed parsing of inline `type` keyword in destructured imports (e.g., `import { type Observable } from 'rxjs'`)
+
 ## [1.16.1]
 
 - fixed combining `import type` named imports when path is the same

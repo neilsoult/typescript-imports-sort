@@ -5,6 +5,7 @@ import { writeImports } from '../write-imports';
 
 export const sortImports = (document: vscode.TextDocument) => {
     const imports = processImportsOverrides(processImports(parseImportNodes(document)));
+    console.log('imports', imports);
     const sortedImportText = writeImports(imports);
     const edits: vscode.TextEdit[] = imports.map((importClause) => {
         return vscode.TextEdit.delete(importClause.range);
