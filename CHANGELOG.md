@@ -4,6 +4,11 @@
 
 - fixed parsing of inline `type` keyword in destructured imports (e.g., `import { type Observable } from 'rxjs'`)
 
+## [1.17.0]
+
+- fixes trailing comma support [Issue #](https://github.com/neilsoult/typescript-imports-sort/issues/7), [Issue #](https://github.com/neilsoult/typescript-imports-sort/issues/14)
+- fixes pathSortOrderOverride bug [Issue #](https://github.com/neilsoult/typescript-imports-sort/issues/16)
+
 ## [1.16.1]
 
 - fixed combining `import type` named imports when path is the same

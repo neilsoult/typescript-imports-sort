@@ -58,6 +58,10 @@ This configurable extension allows you to sort all the imports in a _.ts or _.ts
 
 ## Release Notes
 
+## 1.17.1
+
+- fixed parsing of inline `type` keyword in destructured imports (e.g., `import { type Observable } from 'rxjs'`)
+
 ## 1.17.0
 
 - fixes trailing comma support [Issue #7](https://github.com/neilsoult/typescript-imports-sort/issues/7), [Issue #14](https://github.com/neilsoult/typescript-imports-sort/issues/14)
