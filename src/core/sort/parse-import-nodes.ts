@@ -28,39 +28,30 @@ const importRegex = new RegExp(importRegexString, 'gm');
 const destructingImportTokenRegex = new RegExp(destructingImportToken);
 
 const parseDestructiveImports = (destructiveImports: string): DestructedImport[] => {
-
     if (!destructiveImports) {
-
         return null;
-
     }
 
-    return destructiveImports.split(',')
-    .map((destructiveImport) => {
-
-        const match = destructingImportTokenRegex.exec(destructiveImport);
-        return !match ? null : { alias: match[4], importName: match[1] };
-
-    })
-    .filter((destructiveImport) => !!destructiveImport?.importName);
-
+    return destructiveImports
+        .split(',')
+        .map((destructiveImport) => {
+            const match = destructingImportTokenRegex.exec(destructiveImport);
+            return !match ? null : { alias: match[4], importName: match[1] };
+        })
+        .filter((destructiveImport) => !!destructiveImport?.importName);
 };
 
 export const parseImportNodes = (document: vscode.TextDocument) => {
-
     const source = document.getText();
     importRegex.lastIndex = 0;
     const imports: TypescriptImport[] = [];
 
     if (/(disable-sort-imports)/g.test(source)) {
-
         return [];
-
     }
 
     let match;
-    while (match = importRegex.exec(source)) {
-
+    while ((match = importRegex.exec(source))) {
         // console.log('import regex match', match);
         imports.push({
             default: match[6] || match[19],
@@ -68,14 +59,9 @@ export const parseImportNodes = (document: vscode.TextDocument) => {
             namedImports: parseDestructiveImports(match[7] || match[20]),
             namespace: match[4],
             path: match[32],
-            range: new vscode.Range(
-                document.positionAt(match.index),
-                document.positionAt(importRegex.lastIndex)
-            )
+            range: new vscode.Range(document.positionAt(match.index), document.positionAt(importRegex.lastIndex)),
         });
-
     }
 
     return imports;
-
 };
